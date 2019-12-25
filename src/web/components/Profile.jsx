@@ -2,6 +2,7 @@ import { Table, Container, Card, Row, Col, Button, ButtonToolbar } from 'react-b
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Header from '../Navigation'
+import { Link } from "react-router-dom";
 import Axios from 'axios'
 
 import React, { Component } from 'react'
@@ -66,7 +67,7 @@ export default class Profile extends Component {
             <Container className='justify-content-center mt-3' style={{ paddingBottom:'20px'}}>
                 <Row className='justify-content-center'>
                     <Col md='3'>
-                <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: 'url(/img/lumayan.jpg)', backgroundSize: 'cover' }}>
+                <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: 'url(/img/download.jpg)', backgroundSize: 'cover' }}>
                 <Card.Body style={{ height: '200px'}}>
                 </Card.Body>
                 </Card></Col>
@@ -112,7 +113,7 @@ export default class Profile extends Component {
                 </tbody>
                 </Table>
                 <ButtonToolbar>
-                <Button variant="outline-warning"><FontAwesomeIcon icon={faPencilAlt} /> Edit</Button>&nbsp;
+                <Link to={`/edit/${this.state.id}`}><Button variant="outline-warning"><FontAwesomeIcon icon={faPencilAlt} /> Edit</Button></Link>&nbsp;
                 <Button variant="outline-danger" onClick={() => this.deleteData(`http://localhost:8000/api/v1/engineer/${this.state.id}`)}><FontAwesomeIcon icon={faTrash} /> Delete</Button>
                 </ButtonToolbar></Col>
                 </Row>

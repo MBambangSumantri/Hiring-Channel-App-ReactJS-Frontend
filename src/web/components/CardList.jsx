@@ -1,49 +1,62 @@
 import React from 'react';
-import { Card, Row } from "react-bootstrap";
+import "../css/style.css"
+import { Col, Row, Container } from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faEnvelope, faMoneyBillWave } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import NumberFormat from "react-number-format";
+import { connect } from "react-redux";
 
 function CardList(props) {
-    return (
-      <>
-          <Row className="justify-content-center mt-3">
-            {props.list.map(item => (
-            <Card
-              style={{
-                marginBottom: "40px",
-                marginRight: "35px",
-                borderRadius: "20px",
-                width: "200px",
-                height: "350px",
-                backgroundImage: "url(/img/lumayan.jpg)",
-                backgroundSize: "cover"
-              }}
-            >
-              <Card.Body style={{ height: "200px" }}></Card.Body>
-              <Card.Footer
-                className="text-white bg-dark"
-                style={{
-                  borderRadius: "0px 0px 20px 20px",
-                  lineHeight: "75%",
-                  opacity: "0.7"
-                }}
-              >
-                <h2 style={{ marginTop:'0px', fontSize:'24px'}}><Link to={`/profile/${item.id}`} style={{ color: 'white' }}> {item.name}</Link></h2>
-                <Card.Text>
-                  <p>{item.description}</p>
-                  <small><FontAwesomeIcon icon={faEnvelope} /> Email</small>
-                  <br />
-                  <small><FontAwesomeIcon icon={faMoneyBillWave} /> IDR. {item.expectsalary}</small>
-                  <br />
-                  <small><FontAwesomeIcon/>Skill : {item.skill}</small>
-                </Card.Text>
-              </Card.Footer>
-            </Card>
-            ))}
-          </Row>
-      </>
-    );
+  return (
+    <>
+      {props.Engineers.card.map(item => (
+        <div class="containerImage">
+          <img src={`http://localhost:8000/engineer/${item.photo}`} className="imageGrid" alt="cardImage" />
+          <div class="overlay">
+            <Container>
+              <Row>
+                <Link
+                  to={`/profile/${item.id}`}
+                  style={{ color: "white", fontWeight: "bolder" }}
+                >
+                  {item.name}
+                </Link>
+              </Row>
+              <Row style={{ fontSize: "11px" }}>
+                <Col style={{ padding: "0px" }}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  &nbsp;&nbsp;
+                  {item.email}
+                </Col>
+              </Row>
+              <Row style={{ fontSize: "11px" }}>
+                <Col style={{ padding: "0px" }}>
+                  <FontAwesomeIcon icon={faMoneyBillWave} />
+                  &nbsp;&nbsp;
+                  <NumberFormat
+                    value={item.expectsalary}
+                    displayType="text"
+                    thousandSeparator
+                    prefix="Rp."
+                  />
+                </Col>
+              </Row>
+              <Row style={{ fontSize: "11px", fontWeight: "Bolder" }}>
+                <Col style={{ padding: "0px" }}>Skills:</Col>
+              </Row>
+              <Row style={{ fontSize: "11px", fontWeight: "Bolder" }}>
+                <Col style={{ padding: "0px" }}>{item.skill}</Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+      ))}
+    </>
+  );
 }
 
-export default CardList
+const mapStateToProps = state => ({
+  Engineers: state.Engineers
+});
+export default connect(mapStateToProps)(CardList);
