@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Card, Row, Col, Button, Form, Alert } from 'react-bootstrap'
-import Header from '../Navigation'
+import Header from '../Header'
 import Axios from 'axios'
 
 export default class EditProfile extends Component {
@@ -69,7 +69,7 @@ export default class EditProfile extends Component {
             <Row className='justify-content-center'>
             
             <Col md='3'>
-            <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: 'url(/img/download.jpg)', backgroundSize: 'cover' }}>
+            <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: 'url(/img/profile.jpg)', backgroundSize: 'cover' }}>
             <Card.Body style={{ height: '200px'}}>
             </Card.Body>
             </Card></Col>

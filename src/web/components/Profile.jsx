@@ -1,125 +1,105 @@
 import { Table, Container, Card, Row, Col, Button, ButtonToolbar } from 'react-bootstrap'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
-import Header from '../Navigation'
-import { Link } from "react-router-dom";
-import Axios from 'axios'
-
+import Header from '../Header'
+import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getEngineer, deleteEngineer } from '../redux/actions/Profile'
+import NumberFormat from 'react-number-format'
 
-export default class Profile extends Component {
-    constructor(){
-        super()
-        this.state={
-            id:'',
-            name:'',
-            email:'',
-            description:'',
-            expectsalary:'',
-            skill:'',
-            location:'',
-            dateofbirth:'',
-            showcase:'',
-            datecreate:'',
-            dateupdated:'',
-            isDelete: false
-        }
-    }
+class Profile extends Component {
+    
     componentDidMount(){
-        this.getData(`http://localhost:8000/api/v1/engineer/`+this.props.match.params.id)
+        this.getData(process.env.REACT_APP_BASE_URL+`/api/v1/engineer/`+this.props.match.params.id)
     }
 
-    getData = (url) =>{
-        Axios.get(url)
-        .then(res=>{
-            this.setState({
-                name:res.data.result[0].name,
-                id:res.data.result[0].id,
-                email:res.data.result[0].email,
-                description:res.data.result[0].description,
-                expectsalary:res.data.result[0].expectsalary,
-                skill:res.data.result[0].skill,
-                location:res.data.result[0].location,
-                dateofbirth:res.data.result[0].dateofbirth,
-                showcase:res.data.result[0].showcase,
-                datecreate:res.data.result[0].datecreate,
-                dateupdated:res.data.result[0].dateupdated
-            })
-        })
-    }    
+    getData = (url) => {
+        this.props.get(url)
+    }
 
-    deleteData = (url) =>{
-         console.log(url)
-        Axios.delete(url)
-        .then(res=>{
-            this.setState({
-                isDelete: true
-            })
-        })
-    }    
-
+    deleteData = () => {
+        const url = process.env.REACT_APP_BASE_URL+`/api/v1/engineer/${this.props.Profile.id}`
+        const config =(
+            { headers: { 
+                Authorization:'Bearer '+localStorage.getItem('token'), 
+                email: localStorage.getItem('email')
+            }})
+        this.props.delete(url, config)
+        localStorage.clear()
+    }
+    
     render() {
-        console.log(this.state.id)
+        // console.log(this.state.id)
         return (
             <>
-            <Header user={this.state.name}/>
+            <Header user={this.props.Profile.name}/>
             <Container className='justify-content-center mt-3' style={{ paddingBottom:'20px'}}>
                 <Row className='justify-content-center'>
-                    <Col md='3'>
-                <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: 'url(/img/download.jpg)', backgroundSize: 'cover' }}>
+                <Col md='3'>
+                {(!this.props.Profile.photo) ?
+                <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: `url(/img/profil.jpg)`, backgroundSize: 'cover', backgroundPosition:'center' }}>
                 <Card.Body style={{ height: '200px'}}>
                 </Card.Body>
-                </Card></Col>
+                </Card> : 
+                <Card style={{ marginBottom:'15px', marginRight: '20px', borderRadius:'12%', width: '14rem', height:'20rem', backgroundImage: `url(`+process.env.REACT_APP_BASE_URL+`/engineer/${this.props.Profile.photo})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <Card.Body style={{ height: '200px'}}>
+                </Card.Body>
+                </Card>}</Col>
                 <Col>
                 <Table striped bordered hover>
                 <tbody>
                     <tr>
                     <td width='30%'>Name</td>
-                    <td> {this.state.name}</td>
+                    <td> {this.props.Profile.name}</td>
                     </tr>
                     <tr>
                     <td>Date Of Birth</td>
-                    <td>{this.state.dateOfBirth}</td>
+                    <td>{this.props.Profile.dateofbirth}</td>
                     </tr>
                     <tr>
                     <td>Location</td>
-                    <td>{this.state.location}</td>
-                    </tr>
-                    <tr>
-                    <td>Phone</td>
-                    <td>{this.state.phone}</td>
+                    <td>{(this.props.Profile.location!==null)&&(this.props.Profile.location!=='null')&&this.props.Profile.location}</td>
                     </tr>
                     <tr>
                     <td>Description</td>
-                    <td>{this.state.description}</td>
+                    <td>{(this.props.Profile.description!==null)&&(this.props.Profile.description!=='null')&&this.props.Profile.description}</td>
                     </tr>
                     <tr>
                     <td>Email</td>
-                    <td>{this.state.email}</td>
+                    <td>{this.props.Profile.email}</td>
                     </tr>
                     <tr>
                     <td>Expected Salary</td>
-                    <td>{this.state.expectedSalary}</td>
+                    <td><NumberFormat value={this.props.Profile.expectedSalary} displayType='text' thousandSeparator prefix='Rp. ' /></td>
                     </tr>
                     <tr>
                     <td>Skill</td>
-                    <td>{this.state.skill}</td>
+                    <td>{(this.props.Profile.skill!==null)&&(this.props.Profile.skill!=='null')&&this.props.Profile.skill}</td>
                     </tr>
                     <tr>
                     <td>Showcase</td>
-                    <td>{this.state.showcase}</td>
+                    <td>{(this.props.Profile.showcase!==null)&&(this.props.Profile.showcase!=='null')&&this.props.Profile.showcase}</td>
                     </tr>
                 </tbody>
                 </Table>
                 <ButtonToolbar>
-                <Link to={`/edit/${this.state.id}`}><Button variant="outline-warning"><FontAwesomeIcon icon={faPencilAlt} /> Edit</Button></Link>&nbsp;
-                <Button variant="outline-danger" onClick={() => this.deleteData(`http://localhost:8000/api/v1/engineer/${this.state.id}`)}><FontAwesomeIcon icon={faTrash} /> Delete</Button>
+                <Link to={`/edit/${this.props.Profile.id}`}><Button variant="outline-warning"><FontAwesomeIcon icon={faPencilAlt}/> Edit</Button></Link>&nbsp;
+                <Button variant="outline-danger" onClick={this.deleteData} ><FontAwesomeIcon icon={faTrash} /> Delete</Button>
                 </ButtonToolbar></Col>
                 </Row>
-                { (this.state.isDelete) ? <Redirect to='/' /> : null}
+                { (this.props.Profile.isDeleted) ? <Redirect to='/' /> : null }
             </Container>
         </>
         )
     }
 }
+const mapStateToProps = state => ({
+    Profile: state.Profile
+})
+const mapDispatchToProps= dispatch => ({
+    get: url => dispatch(getEngineer(url)),
+    delete: (url,config) => dispatch(deleteEngineer(url, config))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
