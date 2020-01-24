@@ -1,62 +1,54 @@
 # Hiring Channel App
 
-## Table of contents
-* [General info](#general-info)
-* [Built with](#built-with)
-* [Requirements](#requirements)
-* [Setup](#setup)
-* [Screenshot](#screenshot)
-* [Contact](#contact)
+<h1 align="center">ReactJS - Hiring Channel App</h1>
 
-## General info
-Hiring Channel app is a simple application to connect companies with job seekers. This project for handle frontend only. Built using ReactJS Framework.
+Hiring Channel App is a feature that allows Engineers and Company  to do communicate for looking/hiring jobs. This project for handle frontend only. Built using ReactJS Framework.
 ReactJS is A JavaScript library for building user interfaces. [More about ReactJs](https://reactjs.org/)
-
 ## Built With
-Project is created with:
-
-[![js-standard-style](https://img.shields.io/badge/NodeJs-v.10.16-brightgreen)](https://nodejs.org/en/)
-[![js-standard-style](https://img.shields.io/badge/ReactJs-v.16.12.0-red)](https://reactjs.org)
-[![js-standard-style](https://img.shields.io/badge/React%20Redux-v.7.1-blueviolet)](https://react-redux.js.org/)
+[![ReactJS](https://img.shields.io/badge/ReactJS-16.12.0-blue)](https://reactjs.org/)
 
 ## Requirements
-1. <a href="https://nodejs.org/en/">NodeJs</a>
-2. [Backend Hiring Channel App](https://github.com/MBambangSumantri/RESTful-API-Hiring-Channel)
-3. Web Browser (ex. Chrome/Firefox)
+1. <a href="https://nodejs.org/en/download/">Node Js</a>
+2. backend API using [ExpressJS](https://github.com/halim13/hiring-app)
+3. Node_modules
+4. Web Browser (ex. Chrome/Firefox)
 
-## Setup
-Steps to run this project:
+## How to run the app ?
+To run Hiring Channel App, follow these steps:
+```
+- open your terminal
+- https://github.com/MBambangSumantri/Hiring-Channel-App-ReactJS-Frontend.git
+- cd Hiring-Channel-App-ReactJS-Frontend
+- npm install
+- cp .env.example .env
+- open .env file and fill the requirement
+- npm run start
+- Open browser and enter web url (ex. localhost:3000/login)
+```
 
- - Clone this project
- 
-	``` git clone https://github.com/MBambangSumantri/Hiring-Channel-App-ReactJS-Frontend.git ```
-	
- - Rename .env.example file to .env
- - Edit the .env file and enter your backend url
- 
- 	``` REACT_APP_BASE_URL = http://localhost:3000/ ```
-	
- - Install NPM Packages
- 
-	``` npm install ```
-	
- - Run Project
- 
-	``` npm start ```
+## Contributing to Hiring Channel App
+To contribute to Hiring Channel App, follow these steps:
 
-## Screenshot
-<table>
-<tr align='center'>
-<td><img src=https://user-images.githubusercontent.com/57070723/72789657-bc32d480-3c66-11ea-9e5f-b49fe742f989.png width="300px" /></td>
-<td><img src=https://user-images.githubusercontent.com/57070723/72790279-eafd7a80-3c67-11ea-9887-f6ba908bd950.png width="300px" /></td></tr>
-<tr align="center">
-<td><img src=https://user-images.githubusercontent.com/57070723/72989235-79b4f780-3e20-11ea-8af9-c84f2df7892e.png width="300px" /></td>
-<td><img src=https://user-images.githubusercontent.com/57070723/72989236-7a4d8e00-3e20-11ea-99f9-a5589bc08ce6.png width="300px" /></td></tr>
-<tr align="center">
-<td><img src=https://user-images.githubusercontent.com/57070723/72989238-7a4d8e00-3e20-11ea-9926-e84bb95c6ad7.png width="300px" /></td>
-<td><img src=https://user-images.githubusercontent.com/57070723/72989394-bf71c000-3e20-11ea-95ef-bbe34306c2c5.png width="300px" /></td></tr>
-</table>
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin <project_name>/<location>`
+5. Create the pull request.
+
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+## Screenshots
+<div align="center">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72789657-bc32d480-3c66-11ea-9e5f-b49fe742f989.png">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72790279-eafd7a80-3c67-11ea-9887-f6ba908bd950.png">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72989235-79b4f780-3e20-11ea-8af9-c84f2df7892e.png">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72989236-7a4d8e00-3e20-11ea-99f9-a5589bc08ce6.png">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72989238-7a4d8e00-3e20-11ea-9926-e84bb95c6ad7.png">
+    <img width="250" src="https://user-images.githubusercontent.com/57070723/72989394-bf71c000-3e20-11ea-95ef-bbe34306c2c5.png">
+</div>
 
 ## Contact
 
 If you want to contact me you can reach me at <mbambang10@gmail.com>.
+
+Copyright © 2019 by M. Bambang Sumantri
