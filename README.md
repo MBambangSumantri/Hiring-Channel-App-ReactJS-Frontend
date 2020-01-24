@@ -1,5 +1,3 @@
-# Hiring Channel App
-
 <h1 align="center">ReactJS - Hiring Channel App</h1>
 
 Hiring Channel App is a feature that allows Engineers and Company  to do communicate for looking/hiring jobs. This project for handle frontend only. Built using ReactJS Framework.
